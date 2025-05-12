@@ -26,7 +26,7 @@ public class JwtUtill {
 	private final int accessTokenExpirationMs;
 	private final int refreshTokenExpirationMs;
 	
-	public JwtUtill( @Value("${jwt.screct}") String screctKey,@Value("${jwt.expirationMs}") int accessTokenExpirationMs,@Value("${jwt.refreshExpirationMs}") int refreshTokenExpirationMs) {
+	public JwtUtill( @Value("${jwt.secret}") String screctKey,@Value("${jwt.expirationMs}") int accessTokenExpirationMs,@Value("${jwt.refreshExpirationMs}") int refreshTokenExpirationMs) {
 		this.key = Keys.hmacShaKeyFor(screctKey.getBytes());
 		this.accessTokenExpirationMs = accessTokenExpirationMs;
 		this.refreshTokenExpirationMs= refreshTokenExpirationMs;

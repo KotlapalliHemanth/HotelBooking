@@ -22,11 +22,13 @@ public class AuthController {
 	
 	@PostMapping("/login")
 	public ResponseEntity<Map<String, String>> loginUser(@RequestBody LoginReqDto userInfo) {
+		System.out.println(userInfo);
 		return authservice.loginUser(userInfo);
 	}
 	
 	@PostMapping("/register")
 	public ResponseEntity<String> registerUser(@RequestBody RegisterDto userInfo) {
+		System.out.println(userInfo);
 		return authservice.registerUser(userInfo);
 	}
 }

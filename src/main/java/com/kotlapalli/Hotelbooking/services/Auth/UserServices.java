@@ -23,16 +23,16 @@ public class UserServices {
 	private PasswordEncoder passwordEncoder;
 	
 	public void createUserRecord(RegisterDto RegUser) {
-		if(!userRepository.existsByEmail(RegUser.getEmail())) {
+		if(userRepository.existsByEmail(RegUser.getEmail())) {
 			throw new UserAlreadyExistsException("Email is already in use.");
 		}
 		
-		if(!userRepository.existsByUsername(RegUser.getUsername())) {
+		if(userRepository.existsByUsername(RegUser.getUsername())) {
 			throw new UserAlreadyExistsException("user name is already in Use");
 		}
 		
-		if(!userRepository.existsByNumber(RegUser.getNumber())) {
-			throw new UserAlreadyExistsException("user name is already in Use");
+		if(userRepository.existsByNumber(RegUser.getNumber())) {
+			throw new UserAlreadyExistsException("Moile Number is already in Use");
 		}
 		
 		User user= new User();
@@ -45,6 +45,6 @@ public class UserServices {
 	}
 	
 	public Optional<User> getUserInfo(LoginReqDto Loginuser) {
-		return (userRepository.findByEmailOrUsername(Loginuser.getUNameOrEmail()));
+		return (userRepository.findByEmailOrUsername(Loginuser.getUNameEmail()));
 	}
 }

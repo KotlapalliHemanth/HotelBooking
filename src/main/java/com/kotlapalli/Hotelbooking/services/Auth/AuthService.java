@@ -35,8 +35,7 @@ public class AuthService {
 	
 	public ResponseEntity<Map<String, String>> loginUser(LoginReqDto userinfo) {
 		User user=userservice.getUserInfo(userinfo).orElseThrow(()->new UserNotFoundException("Invalid Username or Email"));
-		
-		if(passwordEncoder.matches(userinfo.getPassword(), user.getPassword())) {
+		if(!passwordEncoder.matches(userinfo.getPassword(), user.getPassword())) {
 			throw new UserNotFoundException("Invalid password");
 		}
 		Map<String, String> response = new HashMap<>();
