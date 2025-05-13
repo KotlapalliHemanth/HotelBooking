@@ -34,6 +34,9 @@ public class UserServices {
 		if(userRepository.existsByNumber(RegUser.getNumber())) {
 			throw new UserAlreadyExistsException("Moile Number is already in Use");
 		}
+		if(RegUser.getRole().name().equalsIgnoreCase("admin")) {
+			throw new UserAlreadyExistsException("Invalid Request");
+		}
 		
 		User user= new User();
 		user.setUsername(RegUser.getUsername());
