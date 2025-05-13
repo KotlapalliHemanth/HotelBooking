@@ -45,14 +45,16 @@ public class JwtUtill {
 	public boolean validateToken(String Token) {
 		Claims claim= getAllClaimsFromToken(Token);
 		
-		User user= userRepo.findByEmailOrUsername(claim.getAudience()).orElse(null);
+		User user= userRepo.findByEmailOrUsername(claim.getSubject()).orElse(null);
+		
+		
 		if(claim.getExpiration().before(new Date()) ) {
 			System.out.println("Token Expired");
 			return false;
 		}else if( user ==null){
 			System.out.println("user does not exist");
 			return false;
-		}else if ((user.getRole().name().equals(claim.get("role", String.class)))) {
+		}else if (!(user.getRole().name().equals(claim.get("role", String.class)))) {
 			System.out.println("Role does not match");
 			return false;
 		}else {
